@@ -2,15 +2,32 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
   "name": "Node.js & TypeScript",
+
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+  // "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye"
+
+  // "build": {
+  //   "dockerfile": "Dockerfile"
+  // }
+
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace/app",
+  "dockerComposeFile": "docker-compose.yml",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [8081],
-  "initializeCommand": "echo \"REACT_NATIVE_PACKAGER_HOSTNAME=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | sed 's/inet //g' | sed '1d')\" > .devcontainer/.env",
+  // "forwardPorts": [8081],
+  "initializeCommand": "bash ./.devcontainer/discover-host-ip.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "golang.go"
+      ]
+    }
+  },
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
 
@@ -18,7 +35,7 @@
   // "customizations": {},
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root",
+  "remoteUser": "root"
 
-  "runArgs": ["-p=8081:8081", "--env-file", ".devcontainer/.env"]
+  // "runArgs": ["-p=8081:8081", "--env-file", ".devcontainer/.env"]
 }
