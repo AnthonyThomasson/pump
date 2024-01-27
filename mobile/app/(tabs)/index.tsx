@@ -1,31 +1,29 @@
-import { StyleSheet } from 'react-native';
-
-import { Text, View } from '@/components/Themed';
-import { useEffect, useState } from 'react';
-
+import { Text, View } from '@/components/Themed'
+import { useEffect, useState } from 'react'
+import { StyleSheet } from 'react-native'
 
 export default function TabOneScreen() {
-  const [data, setData] = useState<string|null>(null);
+  const [data, setData] = useState<string | null>(null)
 
-  let url = String(process.env.REACT_APP_API_URL);
+  let url = String(process.env.REACT_APP_API_URL)
   if (process.env.NODE_ENV === 'development') {
-    url = `http://10.0.0.110:8080`;
+    url = `http://10.0.0.110:8080`
   }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
-        const respString = await response.text(); // assuming the response is in JSON format
+        const response = await fetch(url)
+        const respString = await response.text() // assuming the response is in JSON format
 
-        setData(respString);
+        setData(respString)
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error)
       }
-    };
+    }
 
-    fetchData();
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+    fetchData()
+  }, []) // Empty dependency array means this useEffect runs once when the component mounts
 
   return (
     <View style={styles.container}>
@@ -37,17 +35,21 @@ export default function TabOneScreen() {
         </View>
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   centeredContent: {
     alignItems: 'center',
+  },
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  dataText: {
+    fontSize: 14,
+    textAlign: 'center',
   },
   header: {
     fontSize: 18,
@@ -57,8 +59,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
   },
-  dataText: {
-    fontSize: 14,
-    textAlign: 'center',
-  },
-});
+})
