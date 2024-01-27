@@ -1,2 +1,2 @@
 default:
-	cd app && yarn expo start
+	cd mobile && yarn expo start

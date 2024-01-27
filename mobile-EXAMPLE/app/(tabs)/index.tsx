@@ -1,13 +1,15 @@
-import { HOST_IP } from "@env";
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const App = () => {
-  const [data, setData] = useState(null);
+import { Text, View } from '@/components/Themed';
+import { useEffect, useState } from 'react';
 
-  url = process.env.REACT_APP_API_URL;
+
+export default function TabOneScreen() {
+  const [data, setData] = useState<string|null>(null);
+
+  let url = String(process.env.REACT_APP_API_URL);
   if (process.env.NODE_ENV === 'development') {
-    url = `http://${HOST_IP}:8080`;
+    url = `http://10.0.0.110:8080`;
   }
 
   useEffect(() => {
@@ -60,5 +62,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default App;
