@@ -22,7 +22,11 @@
   "initializeCommand": "bash ./.devcontainer/discover-host-ip.sh",
   "customizations": {
     "vscode": {
-      "extensions": ["ms-azuretools.vscode-docker", "golang.go"]
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "golang.go",
+        "ms-vscode.makefile-tools"
+      ]
     }
   },
   // Use 'postCreateCommand' to run commands after the container is created.
