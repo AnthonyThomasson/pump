@@ -14,5 +14,5 @@ RUN go install -v mvdan.cc/gofumpt@v0.5.0
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 
-RUN mkdir -p /workspace/app
-WORKDIR /workspace/app
+RUN mkdir -p /workspaces/pump
+WORKDIR /workspaces/pump

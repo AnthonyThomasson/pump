@@ -11,7 +11,7 @@
   // }
 
   "service": "devcontainer",
-  "workspaceFolder": "/workspace/app",
+  "workspaceFolder": "/workspaces/pump",
   "dockerComposeFile": "docker-compose.yml",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
@@ -22,10 +22,7 @@
   "initializeCommand": "bash ./.devcontainer/discover-host-ip.sh",
   "customizations": {
     "vscode": {
-      "extensions": [
-        "ms-azuretools.vscode-docker",
-        "golang.go"
-      ]
+      "extensions": ["ms-azuretools.vscode-docker", "golang.go"]
     }
   },
   // Use 'postCreateCommand' to run commands after the container is created.
