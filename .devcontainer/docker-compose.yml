@@ -20,5 +20,17 @@ services:
       - 8080:8080
     volumes:
       - ./../backend:/app:cached
+  db:
+    build:
+      context: ./../db
+      dockerfile: dev.Dockerfile
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=devpassword
+      - POSTGRES_DB=pump
+    volumes:
+      - ./../db/data:/var/lib/postgresql/data
 volumes:
   pump-bashhistory:
