@@ -24,15 +24,17 @@
     "vscode": {
       "settings": {
         "vscode-postgres.defaultConnection": "postgres://dev:devpassword@db:5432/pump",
+        "editor.formatOnPaste": true,
         "editor.codeActionsOnSave": {
           "source.fixAll": "explicit"
-      }
+        }
       },
       "extensions": [
         "ms-azuretools.vscode-docker",
         "golang.go",
         "ckolkman.vscode-postgres",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
       ]
     }
   },
