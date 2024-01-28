@@ -35,7 +35,8 @@
         "ckolkman.vscode-postgres",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "gluestack.gluestack-vscode"
+        "gluestack.gluestack-vscode",
+        "expo.vscode-expo-tools"
       ]
     }
   },

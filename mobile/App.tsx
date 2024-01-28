@@ -13,6 +13,7 @@ export default function App() {
             console.log(`I am ${user.firstName} ${user.lastName} and my token is ${token}`);
           }}
           onError={(error: string) => {
+            debugger;
             console.log('I got an error: ', error);
           }}
         />

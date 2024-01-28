@@ -13,12 +13,9 @@ export default function EmailInput({
   return (
     <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false} {...inputProps}>
       <InputField
-        onChange={(e) => {
-          onChange(String(e.target.state));
-        }}
+        onChange={(e) => onChange(e.nativeEvent.text)}
         value={value}
         placeholder="Email"
-        selectionColor={'$primary500'}
       />
       <InputSlot pr="$4">
         <InputIcon as={AtSignIcon} />

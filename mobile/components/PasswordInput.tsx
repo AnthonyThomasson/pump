@@ -15,9 +15,7 @@ export default function PasswordInput({
   return (
     <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false} {...inputProps}>
       <InputField
-        onChange={(e) => {
-          onChange(String(e.target.state));
-        }}
+        onChange={(e) => onChange(e.nativeEvent.text)}
         value={value}
         type={showPassword === true ? 'text' : 'password'}
         placeholder="Password"
