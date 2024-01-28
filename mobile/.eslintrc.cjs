@@ -3,18 +3,18 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react', 'react-native', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   rules: {
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
   },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-native/all',
-    'prettier'
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
-  root: true
+  root: true,
 };
