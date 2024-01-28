@@ -2,16 +2,23 @@ import { EyeIcon, EyeOffIcon, Input, InputField, InputIcon, InputSlot } from '@g
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-export default function PasswordInput(props: any) {
-  const [password, setPassword] = React.useState('');
+export default function PasswordInput({
+  onChange,
+  value,
+  ...inputProps
+}: {
+  onChange: (email: string) => void;
+  value: string;
+  inputProps?: any;
+}) {
   const [showPassword, setShowPassword] = React.useState(false);
   return (
-    <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false} {...props}>
+    <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false} {...inputProps}>
       <InputField
-        onChange={(e: any) => {
-          setPassword(e.nativeEvent.text);
+        onChange={(e) => {
+          onChange(String(e.target.state));
         }}
-        value={password}
+        value={value}
         type={showPassword === true ? 'text' : 'password'}
         placeholder="Password"
       />

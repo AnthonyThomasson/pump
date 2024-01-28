@@ -1,15 +1,22 @@
 import { AtSignIcon, Input, InputField, InputIcon, InputSlot } from '@gluestack-ui/themed';
 import React from 'react';
 
-export default function EmailInput(props: any) {
-  const [email, setEmail] = React.useState('');
+export default function EmailInput({
+  onChange,
+  value,
+  ...inputProps
+}: {
+  onChange: (email: string) => void;
+  value: string;
+  inputProps?: any;
+}) {
   return (
-    <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false} {...props}>
+    <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false} {...inputProps}>
       <InputField
-        onChange={(e: any) => {
-          setEmail(e.nativeEvent.text);
+        onChange={(e) => {
+          onChange(String(e.target.state));
         }}
-        value={email}
+        value={value}
         placeholder="Email"
         selectionColor={'$primary500'}
       />
