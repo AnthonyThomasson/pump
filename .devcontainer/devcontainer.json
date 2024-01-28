@@ -34,7 +34,8 @@
         "golang.go",
         "ckolkman.vscode-postgres",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "gluestack.gluestack-vscode"
       ]
     }
   },
