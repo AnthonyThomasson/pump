@@ -1,77 +1,21 @@
-import { AtSignIcon, Center, EyeIcon, EyeOffIcon } from '@gluestack-ui/themed';
+import { Center } from '@gluestack-ui/themed';
 
 import { config } from '@gluestack-ui/config';
-import {
-  Button,
-  ButtonText,
-  GluestackUIProvider,
-  Input,
-  InputField,
-  InputIcon,
-  InputSlot,
-} from '@gluestack-ui/themed';
+import { GluestackUIProvider } from '@gluestack-ui/themed';
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import LoginForm from './components/LoginForm';
 export default function App() {
-  const [password, setPassword] = React.useState('');
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [email, setEmail] = React.useState('');
   return (
     <GluestackUIProvider config={config} colorMode="dark">
       <Center flex={1} $dark-bg="$secondary900" $light-bg="$secondary50">
-        <Input
-          size={'xl'}
-          variant={'rounded'}
-          isInvalid={false}
-          isDisabled={false}
-          mt={10}
-          marginHorizontal={50}
-        >
-          <InputField
-            onChange={(e: any) => {
-              setEmail(e.nativeEvent.text);
-            }}
-            value={email}
-            placeholder="Email"
-          />
-          <InputSlot pr="$4">
-            <InputIcon as={AtSignIcon} />
-          </InputSlot>
-        </Input>
-
-        <Input
-          size={'xl'}
-          variant={'rounded'}
-          isInvalid={false}
-          isDisabled={false}
-          mt={10}
-          marginHorizontal={50}
-        >
-          <InputField
-            onChange={(e: any) => {
-              setPassword(e.nativeEvent.text);
-            }}
-            value={password}
-            type={showPassword === true ? 'text' : 'password'}
-            placeholder="Password"
-          />
-          <InputSlot pr="$4">
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <InputIcon as={showPassword === true ? EyeIcon : EyeOffIcon} />
-            </TouchableOpacity>
-          </InputSlot>
-        </Input>
-
-        <Button
-          mt={10}
-          onPress={() => console.log('I will login')}
-          action={'primary'}
-          variant={'solid'}
-          size={'lg'}
-          isDisabled={false}
-        >
-          <ButtonText>Login</ButtonText>
-        </Button>
+        <LoginForm
+          onSuccess={(loginToken: string) => {
+            console.log('I am logged in with token: ', loginToken);
+          }}
+          onError={(error: string) => {
+            console.log('I got an error: ', error);
+          }}
+        />
       </Center>
     </GluestackUIProvider>
   );
