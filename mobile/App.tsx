@@ -1,6 +1,6 @@
 import { AtSignIcon, Center, EyeIcon, EyeOffIcon } from '@gluestack-ui/themed';
 
-import { config } from '@gluestack-ui/config'; // Optional if you want to use default theme
+import { config } from '@gluestack-ui/config';
 import {
   Button,
   ButtonText,
@@ -17,8 +17,8 @@ export default function App() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
   return (
-    <GluestackUIProvider config={config}>
-      <Center flex={1} bg="primary.500">
+    <GluestackUIProvider config={config} colorMode="dark">
+      <Center flex={1} $dark-bg="$secondary900" $light-bg="$secondary50">
         <Input
           size={'xl'}
           variant={'rounded'}
