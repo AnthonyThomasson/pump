@@ -8,7 +8,7 @@ export default function LoginForm({
   onError,
   ...modifiers
 }: {
-  onSuccess: (loginToken: string) => void;
+  onSuccess: (loginToken: string, user: User) => void;
   onError: (error: string) => void;
   modifiers?: any;
 }) {
@@ -33,7 +33,7 @@ export default function LoginForm({
           maxWidth={150}
           onPress={() => {
             login(email, password)
-              .then((loginToken) => onSuccess(loginToken))
+              .then((response) => onSuccess(response.token, response.user))
               .catch((error) => onError(error));
           }}
           action={'primary'}
@@ -48,14 +48,22 @@ export default function LoginForm({
   );
 }
 
+export type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
 type LoginResponse = {
   token: string;
+  user: User;
 };
 type LoginErrorResponse = {
   message: string;
 };
 
-const login = async (email: string, password: string): Promise<string> => {
+const login = async (email: string, password: string): Promise<LoginResponse> => {
   let response = await fetch('https://www.example.com', {
     method: 'POST',
     headers: {
@@ -70,7 +78,7 @@ const login = async (email: string, password: string): Promise<string> => {
     let resp = await response.json();
     let loginResponse = resp as LoginResponse;
     if (loginResponse.token) {
-      return loginResponse.token;
+      return loginResponse;
     }
     let loginErrorResponse = resp as LoginErrorResponse;
     if (loginErrorResponse.message) {
