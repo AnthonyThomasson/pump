@@ -1,27 +1,32 @@
-import { ButtonText } from '@gluestack-ui/themed';
+import { AtSignIcon, Center, EyeIcon, EyeOffIcon } from '@gluestack-ui/themed';
 
 import { config } from '@gluestack-ui/config'; // Optional if you want to use default theme
 import {
-  Box,
   Button,
+  ButtonText,
   GluestackUIProvider,
   Input,
   InputField,
   InputIcon,
   InputSlot,
-  SearchIcon,
-  Text,
 } from '@gluestack-ui/themed';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 export default function App() {
   const [password, setPassword] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
   return (
     <GluestackUIProvider config={config}>
-      <Box width="100%" justifyContent="center" alignItems="center">
-        <Text>Open up App.js to start working on your app!</Text>
-
-        <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false}>
+      <Center flex={1} bg="primary.500">
+        <Input
+          size={'xl'}
+          variant={'rounded'}
+          isInvalid={false}
+          isDisabled={false}
+          mt={10}
+          marginHorizontal={50}
+        >
           <InputField
             onChange={(e: any) => {
               setEmail(e.nativeEvent.text);
@@ -30,25 +35,35 @@ export default function App() {
             placeholder="Email"
           />
           <InputSlot pr="$4">
-            <InputIcon as={SearchIcon} />
+            <InputIcon as={AtSignIcon} />
           </InputSlot>
         </Input>
 
-        <Input size={'xl'} variant={'rounded'} isInvalid={false} isDisabled={false}>
+        <Input
+          size={'xl'}
+          variant={'rounded'}
+          isInvalid={false}
+          isDisabled={false}
+          mt={10}
+          marginHorizontal={50}
+        >
           <InputField
             onChange={(e: any) => {
               setPassword(e.nativeEvent.text);
             }}
             value={password}
-            type="password"
+            type={showPassword === true ? 'text' : 'password'}
             placeholder="Password"
           />
           <InputSlot pr="$4">
-            <InputIcon as={SearchIcon} />
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <InputIcon as={showPassword === true ? EyeIcon : EyeOffIcon} />
+            </TouchableOpacity>
           </InputSlot>
         </Input>
 
         <Button
+          mt={10}
           onPress={() => console.log('I will login')}
           action={'primary'}
           variant={'solid'}
@@ -57,7 +72,7 @@ export default function App() {
         >
           <ButtonText>Login</ButtonText>
         </Button>
-      </Box>
+      </Center>
     </GluestackUIProvider>
   );
 }
