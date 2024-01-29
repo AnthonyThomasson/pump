@@ -20,7 +20,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./../backend:/code
+      - ./../backend:/server/code
   db:
     build:
       context: ./../db
