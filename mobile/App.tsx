@@ -1,4 +1,6 @@
-import { Center } from '@gluestack-ui/themed';
+import '@expo/metro-runtime';
+
+import { Center, Text } from '@gluestack-ui/themed';
 
 import { config } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
@@ -7,6 +9,8 @@ export default function App() {
   return (
     <GluestackUIProvider config={config} colorMode="dark">
       <Center flex={1} $dark-bg="$secondary900" $light-bg="$secondary50">
+        <Text>Host: </Text>
+
         <LoginForm
           onSuccess={(token: string, user: User) => {
             console.log(`I am ${user.firstName} ${user.lastName} and my token is ${token}`);

@@ -64,7 +64,12 @@ type LoginErrorResponse = {
 };
 
 const login = async (email: string, password: string): Promise<LoginResponse> => {
-  let response = await fetch('https://www.example.com', {
+  let apiHost = 'https://www.example.com';
+  if (__DEV__) {
+    apiHost = `http://${process.env.EXPO_PUBLIC_HOST_IP}:8080`;
+  }
+
+  let response = await fetch(`${apiHost}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
