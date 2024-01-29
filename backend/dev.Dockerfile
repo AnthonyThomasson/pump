@@ -1,4 +1,5 @@
 FROM golang:1.21-bookworm as builder
-WORKDIR /build
+WORKDIR /code
 COPY . .
-CMD ["go", "run", "main.go"]
+RUN go install github.com/cosmtrek/air@latest
+CMD ["air","--build.cmd", "go build -o /bin/api main.go", "--build.bin", "/bin/api"]

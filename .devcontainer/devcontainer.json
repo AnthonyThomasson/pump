@@ -23,6 +23,19 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "launch": {
+          "version": "0.2.0",
+          "configurations": [
+            {
+              "type": "expo",
+              "request": "attach",
+              "name": "Debug Mobile App",
+              "projectRoot": "${workspaceFolder}/mobile",
+              "bundlerPort": "8081",
+              "bundlerHost": "10.0.0.110"
+            }
+          ]
+        },
         "vscode-postgres.defaultConnection": "postgres://dev:devpassword@db:5432/pump",
         "editor.formatOnPaste": true,
         "editor.codeActionsOnSave": {

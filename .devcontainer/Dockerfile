@@ -13,7 +13,7 @@ RUN curl -O https://dl.google.com/go/go1.21.6.linux-arm64.tar.gz && \
 	mv go /usr/local
 ENV PATH="/usr/local/go/bin:${PATH}"
 RUN go install golang.org/x/tools/gopls@latest
-RUN go install -v mvdan.cc/gofumpt@v0.5.0
+RUN go install mvdan.cc/gofumpt@v0.5.0
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 RUN mkdir -p /workspaces/pump

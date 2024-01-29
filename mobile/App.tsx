@@ -2,7 +2,6 @@ import { Center } from '@gluestack-ui/themed';
 
 import { config } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
-import React from 'react';
 import LoginForm, { User } from './components/LoginForm';
 export default function App() {
   return (
@@ -13,7 +12,6 @@ export default function App() {
             console.log(`I am ${user.firstName} ${user.lastName} and my token is ${token}`);
           }}
           onError={(error: string) => {
-            debugger;
             console.log('I got an error: ', error);
           }}
         />
