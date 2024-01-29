@@ -33,6 +33,18 @@
               "projectRoot": "${workspaceFolder}/mobile",
               "bundlerPort": "8081",
               "bundlerHost": "10.0.0.110"
+            },
+            {
+              "name": "Backend",
+              "type": "go",
+              "debugAdapter": "dlv-dap",
+              "request": "attach",
+              "mode": "remote",
+              "port": 4040,
+              "host": "backend",
+              "substitutePath": [
+                { "from": "${workspaceFolder}/backend", "to": "/server/code" }
+              ]
             }
           ]
         },
@@ -49,7 +61,8 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "gluestack.gluestack-vscode",
-        "expo.vscode-expo-tools"
+        "expo.vscode-expo-tools",
+        "tamasfe.even-better-toml"
       ]
     }
   },

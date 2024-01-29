@@ -17,7 +17,7 @@ func main() {
 	r := chi.NewRouter()
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, welcome to the Chi web service!"))
+		w.Write([]byte("Hello, welcome to the Chi web service!!"))
 	})
 
 	r.Post("/login", func(w http.ResponseWriter, r *http.Request) {

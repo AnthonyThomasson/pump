@@ -19,6 +19,7 @@ services:
     restart: always
     ports:
       - 8080:8080
+      - 4040:4040
     volumes:
       - ./../backend:/server/code
   db:
