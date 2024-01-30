@@ -4,7 +4,7 @@ import React from 'react';
 export default function EmailInput({
   onChange,
   value,
-  ...inputProps
+  inputProps,
 }: {
   onChange: (email: string) => void;
   value: string;

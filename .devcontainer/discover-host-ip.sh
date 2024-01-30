@@ -5,5 +5,5 @@ ip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | sed 's/inet //g' | 
   
 echo "Discovered Host IP: $ip"
 echo "REACT_NATIVE_PACKAGER_HOSTNAME=\"$ip\"" > .devcontainer/.env.local
-echo "HOST_IP=\"$ip\"" > mobile/.env.local
+echo "EXPO_PUBLIC_HOST_IP=\"$ip\"" > mobile/.env.local
 echo "Configured Environment Variables!"

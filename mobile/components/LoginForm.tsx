@@ -1,4 +1,4 @@
-import { Box, Button, ButtonText, Center } from '@gluestack-ui/themed';
+import { Box, Button, ButtonText, Center, useMedia } from '@gluestack-ui/themed';
 import React from 'react';
 import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
@@ -6,7 +6,7 @@ import PasswordInput from './PasswordInput';
 export default function LoginForm({
   onSuccess,
   onError,
-  ...modifiers
+  modifiers,
 }: {
   onSuccess: (loginToken: string, user: User) => void;
   onError: (error: string) => void;
@@ -15,22 +15,23 @@ export default function LoginForm({
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const media = useMedia();
+
   return (
-    <Box {...modifiers}>
+    <Box {...modifiers} minWidth={media.md ? '20%' : '80%'}>
       <EmailInput
         onChange={(email: string) => setEmail(email)}
         value={email}
-        inputProps={{ mt: 5 }}
+        inputProps={{ mt: 10 }}
       />
       <PasswordInput
         onChange={(password: string) => setPassword(password)}
         value={password}
-        inputProps={{ mt: 5 }}
+        inputProps={{ mt: 10 }}
       />
       <Center>
         <Button
           mt={20}
-          maxWidth={150}
           onPress={() => {
             login(email, password)
               .then((response) => onSuccess(response.token, response.user))
@@ -64,7 +65,7 @@ type LoginErrorResponse = {
 };
 
 const login = async (email: string, password: string): Promise<LoginResponse> => {
-  let apiHost = 'https://www.example.com';
+  let apiHost = `https://${process.env.EXPO_PUBLIC_HOST}`;
   if (__DEV__) {
     apiHost = `http://${process.env.EXPO_PUBLIC_HOST_IP}:8080`;
   }

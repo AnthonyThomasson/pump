@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 export default function PasswordInput({
   onChange,
   value,
-  ...inputProps
+  inputProps,
 }: {
   onChange: (email: string) => void;
   value: string;
