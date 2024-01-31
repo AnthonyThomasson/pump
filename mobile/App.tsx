@@ -1,23 +1,16 @@
 import '@expo/metro-runtime';
 
-import { Center } from '@gluestack-ui/themed';
-
 import { config } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
-import LoginForm, { User } from './components/LoginForm';
+import { useAuth } from './hooks/useAuth';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
 export default function App() {
+  const { loggedIn } = useAuth();
+
   return (
     <GluestackUIProvider config={config} colorMode="dark">
-      <Center flex={1} $dark-bg="$secondary900" $light-bg="$secondary50">
-        <LoginForm
-          onSuccess={(token: string, user: User) => {
-            console.log(`I am ${user.firstName} ${user.lastName} and my token is ${token}`);
-          }}
-          onError={(error: string) => {
-            console.log('I got an error: ', error);
-          }}
-        />
-      </Center>
+      {loggedIn ? <LandingPage /> : <LoginPage />}
     </GluestackUIProvider>
   );
 }
