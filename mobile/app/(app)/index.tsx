@@ -1,22 +1,19 @@
-import { Text, View } from 'react-native';
-
+import { Button, ButtonText, Center, Text } from '@gluestack-ui/themed';
 import { useSession } from '../../ctx/SessionProvider';
 
 export default function Index() {
   const { signOut, user } = useSession();
+
+  console.log('user', user);
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Center flex={1} $dark-bg="$secondary900" $light-bg="$secondary50">
       <Text>
-        Welcome {user?.firstName} {user?.lastName}
+        Name: {user?.firstName} {user?.lastName}
       </Text>
-      <Text
-        onPress={() => {
-          // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
-          signOut();
-        }}
-      >
-        Sign Out
-      </Text>
-    </View>
+      <Text>Email: {user?.email}</Text>
+      <Button onPress={() => signOut()}>
+        <ButtonText>Sign Out</ButtonText>
+      </Button>
+    </Center>
   );
 }
