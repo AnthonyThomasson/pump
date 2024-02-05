@@ -4,27 +4,39 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-type Credentials struct {
-	Username string `json:"email"`
-	Password string `json:"password"`
-}
-
 func main() {
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB"),
+		os.Getenv("DB_PORT"),
+	)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		fmt.Println("Failed to connect to the database:", err)
+		return
+	}
+	conn, _ := db.DB()
+	defer conn.Close()
+	if err := migrate(db); err != nil {
+		fmt.Println("Failed to migrate the database:", err)
+		return
+	}
+
 	r := chi.NewRouter()
-
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, welcome to the Chi web service!!"))
-	})
-
 	r.Post("/login", func(w http.ResponseWriter, r *http.Request) {
 		var credentials Credentials
 		err := json.NewDecoder(r.Body).Decode(&credentials)
 		if err != nil {
-			fmt.Println("error decoding JSON: ", err)
 			http.Error(w, "Invalid JSON payload", http.StatusBadRequest)
 			json.NewEncoder(w).Encode(map[string]interface{}{
 				"message": "Are you dumb? Thats not json.",
@@ -32,27 +44,18 @@ func main() {
 			return
 		}
 
-		// Check if both username and password are provided
-		if credentials.Username == "" || credentials.Password == "" {
-			fmt.Println("username or password is empty")
-			w.WriteHeader(http.StatusBadRequest)
+		session, err := login(db, credentials)
+		if err != nil {
+			http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(map[string]interface{}{
-				"message": "Are you dumb? Enter your username and password.",
+				"message": "Invalid credentials",
 			})
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"token": "abc123",
-			"user": map[string]string{
-				"email":     "athomasson.93@gmail.com",
-				"firstName": "John",
-				"lastName":  "Doe",
-			},
-		})
+		json.NewEncoder(w).Encode(session)
 	})
-
 	fmt.Println("Server is running on port 8080...")
 	http.ListenAndServe(":8080", r)
 }

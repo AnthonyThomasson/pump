@@ -10,6 +10,7 @@ services:
       # Forward docker socket to allow docker commands to be run from within the container
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
+      - .env
       - .env.local
     command: sleep infinity
   backend:
@@ -17,6 +18,12 @@ services:
       context: ./../backend
       dockerfile: dev.Dockerfile
     restart: always
+    environment:
+      - DB_USER=dev
+      - DB_PASSWORD=devpassword
+      - DB=pump
+      - DB_HOST=db
+      - DB_PORT=5432
     ports:
       - 8080:8080
       - 4040:4040
