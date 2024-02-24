@@ -28,11 +28,9 @@ services:
       - 8080:8080
       - 4040:4040
     volumes:
-      - ./../backend:/server/code
+      - ./../backend:/server
   db:
-    build:
-      context: ./../db
-      dockerfile: dev.Dockerfile
+    image: postgres:16.1
     restart: always
     ports:
       - 5432:5432

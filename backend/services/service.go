@@ -1,4 +1,4 @@
-package main
+package services
 
 import (
 	"errors"
@@ -12,7 +12,7 @@ type Credentials struct {
 	Password string `json:"password"`
 }
 
-func login(db *gorm.DB, creds Credentials) (*Session, error) {
+func Login(db *gorm.DB, creds Credentials) (*Session, error) {
 	var customer Customer
 	err := db.Where("username = ? AND password = ?", creds.Username, creds.Password).First(&customer).Error
 	if err == nil {

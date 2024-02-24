@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"athomasson.com/pump/services"
 	"github.com/go-chi/chi/v5"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -20,6 +21,7 @@ func main() {
 		os.Getenv("DB"),
 		os.Getenv("DB_PORT"),
 	)
+
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("Failed to connect to the database:", err)
@@ -27,14 +29,18 @@ func main() {
 	}
 	conn, _ := db.DB()
 	defer conn.Close()
-	if err := migrate(db); err != nil {
+	if err := services.Migrate(db); err != nil {
 		fmt.Println("Failed to migrate the database:", err)
 		return
 	}
 
 	r := chi.NewRouter()
+	r.Get("/status", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	})
 	r.Post("/login", func(w http.ResponseWriter, r *http.Request) {
-		var credentials Credentials
+		var credentials services.Credentials
 		err := json.NewDecoder(r.Body).Decode(&credentials)
 		if err != nil {
 			http.Error(w, "Invalid JSON payload", http.StatusBadRequest)
@@ -44,7 +50,7 @@ func main() {
 			return
 		}
 
-		session, err := login(db, credentials)
+		session, err := services.Login(db, credentials)
 		if err != nil {
 			http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(map[string]interface{}{

@@ -5,8 +5,8 @@ go 1.21
 require (
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/google/uuid v1.6.0
-	gorm.io/driver/postgres v1.5.5
-	gorm.io/gorm v1.25.6
+	gorm.io/driver/postgres v1.5.6
+	gorm.io/gorm v1.25.7
 )
 
 require (
@@ -16,7 +16,7 @@ require (
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	golang.org/x/crypto v0.18.0 // indirect
+	golang.org/x/crypto v0.19.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 )
