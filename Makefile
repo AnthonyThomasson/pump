@@ -1,5 +1,5 @@
 default:
-	cd mobile && yarn expo start
+	cd mobile && yarn && yarn expo start
 
 .PHONY: example
 example:
